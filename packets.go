@@ -17,6 +17,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"log"
 	"math"
 	"time"
 )
@@ -29,6 +30,7 @@ func (mc *mysqlConn) readPacket() ([]byte, error) {
 	var prevData []byte
 	for {
 		// read packet header
+		log.Println("new read packet!")
 		data, err := mc.buf.readNext(4)
 		if err != nil {
 			if cerr := mc.canceled.Value(); cerr != nil {
